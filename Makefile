@@ -1,19 +1,38 @@
 CPPFLAGS= -c -g -Wall -pedantic -std=c++17 
 
-__start__: example.out
-	./example.out
+__start__: DronPodwodny
+	./DronPodwodny
 
-example.out: Dr3D_gnuplot_api.o example.o
-	g++ -o example.out example.o Dr3D_gnuplot_api.o -lpthread
+DronPodwodny: obj/Dr3D_gnuplot_api.o obj/main.o obj/UkladRownanLiniowych.o obj/Macierz.o obj/Wektor.o obj/LZespolona.o obj/AbsV.o
+	g++ -o DronPodwodny  obj/main.o obj/Dr3D_gnuplot_api.o -lpthread\
+						obj/Wektor.o\
+						obj/Macierz.o obj/UkladRownanLiniowych.o\
+						obj/LZespolona.o obj/AbsV.o
 
-example.o: example.cpp Dr3D_gnuplot_api.hh
-	g++ ${CPPFLAGS} -o example.o example.cpp
+obj/main.o: src/main.cpp 	inc/Dr3D_gnuplot_api.hh inc/UkladRownanLiniowych.hh inc/Macierz.hh inc/Wektor.hh\
+        					inc/rozmiar.h inc/LZespolona.hh inc/AbsV.hh
+	g++ ${CPPFLAGS} -o  obj/main.o src/main.cpp
 
-Dr3D_gnuplot_api.o: Dr3D_gnuplot_api.cpp Dr3D_gnuplot_api.hh
-	g++ ${CPPFLAGS} -o Dr3D_gnuplot_api.o Dr3D_gnuplot_api.cpp
+obj/Dr3D_gnuplot_api.o: src/Dr3D_gnuplot_api.cpp inc/Dr3D_gnuplot_api.hh
+	g++ ${CPPFLAGS} -o obj/Dr3D_gnuplot_api.o src/Dr3D_gnuplot_api.cpp
 
-Dr3D_gnuplot_api.hh: Draw3D_api_interface.hh
-	touch Dr3D_gnuplot_api.hh
+inc/Dr3D_gnuplot_api.hh: inc/Draw3D_api_interface.hh
+	touch inc/Dr3D_gnuplot_api.hh
+
+obj/LZespolona.o: src/LZespolona.cpp inc/LZespolona.hh
+	g++ ${CPPFLAGS} -o obj/LZespolona.o src/LZespolona.cpp
+
+obj/AbsV.o: src/AbsV.cpp inc/AbsV.hh
+	g++ ${CPPFLAGS} -o obj/AbsV.o src/AbsV.cpp
+
+obj/UkladRownanLiniowych.o: src/UkladRownanLiniowych.cpp inc/UkladRownanLiniowych.hh
+	g++ ${CPPFLAGS} -o obj/UkladRownanLiniowych.o src/UkladRownanLiniowych.cpp
+
+obj/Macierz.o: src/Macierz.cpp inc/Macierz.hh 
+	g++ ${CPPFLAGS} -o obj/Macierz.o src/Macierz.cpp
+
+obj/Wektor.o: src/Wektor.cpp inc/Wektor.hh inc/rozmiar.h inc/LZespolona.hh
+	g++ ${CPPFLAGS} -o obj/Wektor.o src/Wektor.cpp
 
 clear:
-	rm example.out example.o Dr3D_gnuplot_api.o
+	rm obj/*.o DronPodwodny
