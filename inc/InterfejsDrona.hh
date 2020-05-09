@@ -9,7 +9,7 @@ class InterfejsDrona
 protected:
     
 public:
-    void Sterowanie();
+    
 
 };
 

@@ -7,22 +7,19 @@
 class Bryla
 {
 protected:
-    
+    MacierzOb MacOb;
     Wektor<double,3> WekPol; //wektor wspolrzednych srodka obiektu
 public:
-    MacierzOb MacOb;
     Bryla(): WekPol{0,0,0} {}
     Bryla(double WspX, double WspY, double WspZ): WekPol{WspX, WspY, WspZ} {}
 
-    void SetX(double x){this->WekPol[0]=x;}
-    void SetY(double y){this->WekPol[1]=y;}
-    void SetZ(double z){this->WekPol[2]=z;}
+    void SetWekPol(Wektor<double,3> Wek2) {this->WekPol=Wek2;}
+    const Wektor<double,3> GetWekPol(){return this->WekPol;}
 
-    const double GetX(){return this->WekPol[0];}
-    const double GetY(){return this->WekPol[1];}
-    const double GetZ(){return this->WekPol[2];}
+    const MacierzKw<double, 3> GetMacierzObrotu() {return this->MacOb;}
 
     virtual void obroc(double kat, char kierunek)=0;
+    virtual void przesun(Wektor<double,3> V)=0;
 
 };
 

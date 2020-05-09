@@ -1,4 +1,8 @@
 #include <iostream>
+
+#include <sys/ioctl.h>
+#include <termios.h>
+
 #include "Dr3D_gnuplot_api.hh"
 #include "Dron.hh"
 
@@ -8,6 +12,25 @@ using drawNS::Point3D;
 using drawNS::APIGnuPlot3D;
 using std::cout;
 using std::endl;
+
+
+
+bool kbhit()
+{
+    termios term;
+    tcgetattr(0, &term);
+
+    termios term2 = term;
+    term2.c_lflag &= ~ICANON;
+    tcsetattr(0, TCSANOW, &term2);
+
+    int byteswaiting;
+    ioctl(0, FIONREAD, &byteswaiting);
+
+    tcsetattr(0, TCSANOW, &term);
+
+    return byteswaiting > 0;
+}
 
 void wait4key()
 {
@@ -91,19 +114,25 @@ int main()
 {
     std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-20,20,-20,20,-20,20,-1)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
     //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
+    Dron D1(1,1,1,3,6,4);
+    int p;
+    char input='0';
+    p=D1.Rysuj(api);
 
-    Prostopadloscian P1(1,2,5,6,10,6);
-    int a=P1.Rysuj(api);
-    wait4key();
-    while(1)
+    while(input!='k')
     {   
-        
-        api->erase_shape(a);
-        P1.obroc(10,'x');
+        if(kbhit())
+        {
+            api->erase_shape(p);
+            input=getchar();
+            
+            D1.Sterowanie(input);
+            
+            p=D1.Rysuj(api);
+            
+            api->redraw();
+        }
 
-        a=P1.Rysuj(api);
-        api->redraw();
-        wait4key();
     }
   //delete api;//dla zwykłych wskaźników musimy posprzątać
 }

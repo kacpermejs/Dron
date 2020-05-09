@@ -9,7 +9,11 @@ class Dron: public InterfejsDrona, public Prostopadloscian
 {
     
 public:
-    virtual int Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)override;
+    Dron(): Prostopadloscian() {}
+    Dron(double WspX, double WspY, double WspZ, double WymX, double WymY, double WymZ): Prostopadloscian(WspX, WspY, WspZ, WymX, WymY, WymZ) {}
+
+    
+    void Sterowanie(char input);
 
 };
 
