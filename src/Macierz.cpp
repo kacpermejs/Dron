@@ -241,6 +241,13 @@ Wektor<Typ, Rozmiar> MacierzKw<Typ, Rozmiar>::operator*(const Wektor<Typ, Rozmia
         }
     return Wynik;
 }
+
+template<typename Typ, int Rozmiar>
+void MacierzKw<Typ,Rozmiar>::UstawMacierz(MacierzKw<Typ, Rozmiar> Mac2)
+{
+    for(int i=0; i<Rozmiar; ++i)
+        Tab[i]=Mac2[i];
+}
 //==========================================================================================================
 
 template<typename Typ, int Rozmiar>

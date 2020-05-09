@@ -60,6 +60,7 @@ public:
     Typ & operator() (int ind1, int ind2) { return this->Tab[ind2][ind1]; }
 
     const Wektor<Typ, Rozmiar> zwrocWiersz(int index) const;
+    void UstawMacierz(MacierzKw<Typ, Rozmiar> Mac2);
 
 };
 
