@@ -1,16 +1,16 @@
-CPPFLAGS= -c -g -Wall -pedantic -std=c++17 
+CPPFLAGS= -c -g -Wall -Iinc -pedantic -std=c++17 
 
 __start__: DronPodwodny
 	./DronPodwodny
 
-DronPodwodny: obj/Dr3D_gnuplot_api.o obj/main.o obj/UkladRownanLiniowych.o obj/Macierz.o obj/Wektor.o obj/LZespolona.o obj/AbsV.o
-	g++ -o DronPodwodny  obj/main.o obj/Dr3D_gnuplot_api.o -lpthread\
+DronPodwodny: obj/Dr3D_gnuplot_api.o obj/main.o obj/UkladRownanLiniowych.o obj/Macierz.o obj/Wektor.o obj/LZespolona.o obj/AbsV.o obj/Classes.o
+	g++ -o DronPodwodny  obj/main.o obj/Dr3D_gnuplot_api.o obj/Classes.o -lpthread\
 						obj/Wektor.o\
 						obj/Macierz.o obj/UkladRownanLiniowych.o\
 						obj/LZespolona.o obj/AbsV.o
 
 obj/main.o: src/main.cpp 	inc/Dr3D_gnuplot_api.hh inc/UkladRownanLiniowych.hh inc/Macierz.hh inc/Wektor.hh\
-        					inc/rozmiar.h inc/LZespolona.hh inc/AbsV.hh
+        					inc/rozmiar.h inc/LZespolona.hh inc/AbsV.hh inc/Classes.hh
 	g++ ${CPPFLAGS} -o  obj/main.o src/main.cpp
 
 obj/Dr3D_gnuplot_api.o: src/Dr3D_gnuplot_api.cpp inc/Dr3D_gnuplot_api.hh
@@ -33,6 +33,9 @@ obj/Macierz.o: src/Macierz.cpp inc/Macierz.hh
 
 obj/Wektor.o: src/Wektor.cpp inc/Wektor.hh inc/rozmiar.h inc/LZespolona.hh
 	g++ ${CPPFLAGS} -o obj/Wektor.o src/Wektor.cpp
+
+obj/Classes.o: src/Classes.cpp inc/Classes.hh
+	g++ ${CPPFLAGS} -o obj/Classes.o src/Classes.cpp
 
 clear:
 	rm obj/*.o DronPodwodny

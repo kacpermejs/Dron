@@ -27,6 +27,7 @@ public:
     MacierzKw<Typ, Rozmiar>();
     MacierzKw<Typ, Rozmiar>(const Wektor<Typ, Rozmiar> Tab[]);
     //MacierzKw<Typ, Rozmiar>(Wektor<Typ, Rozmiar> A, Wektor<Typ, Rozmiar> B, Wektor<Typ, Rozmiar> C);
+    MacierzKw<Typ, Rozmiar>(std::initializer_list<Wektor<Typ, Rozmiar>> in);
 
     const Typ wyznacznikLaplace();// rozwiniecje laplace'a, gaussa, sarrusa
     const Typ wyznacznikGauss();

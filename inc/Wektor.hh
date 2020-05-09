@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include <initializer_list>
 #include "rozmiar.h"
 #include "LZespolona.hh"
 
@@ -22,8 +23,9 @@ protected:
     Wektor<Typ, Rozmiar>();
 
     //Wektor<Typ, Rozmiar>(double x, double y, double z);
-    //Wektor<Typ, Rozmiar>(Typ x,Typ y, Typ z);
+    //Wektor<Typ, Rozmiar>(Typ x,Typ y, Typ z);//tylko dla 3
     Wektor<Typ, Rozmiar>(Typ tablica[]);
+    Wektor<Typ, Rozmiar>(std::initializer_list<Typ> in);
 
     Wektor<Typ, Rozmiar> & operator += (const Wektor<Typ, Rozmiar> & W2); //W1 += W2  , W1 += W3 += W4
     Wektor<Typ, Rozmiar> & operator -= (const Wektor<Typ, Rozmiar> & W2);

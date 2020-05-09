@@ -14,6 +14,16 @@ MacierzKw<Typ, Rozmiar>::MacierzKw(const Wektor<Typ, Rozmiar> tablica[])
     for(int i=0; i<Rozmiar; i++)
         this->Tab[i]=tablica[i];
 }
+template<typename Typ, int Rozmiar>
+MacierzKw<Typ, Rozmiar>::MacierzKw(std::initializer_list<Wektor<Typ, Rozmiar>> in)
+{
+    int i=0;
+    for (auto & elem : in)
+    {
+        Tab[i] = elem;
+        i++;
+    }
+}
 
 /*
 template<typename Typ, int Rozmiar>

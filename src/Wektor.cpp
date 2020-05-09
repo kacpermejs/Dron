@@ -12,6 +12,7 @@ Wektor<Typ, Rozmiar>::Wektor()
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar>::Wektor(Typ x, Typ y, Typ z)
 {
+    assert(Rozmiar==3);
     this->Tab[0] = x;
     this->Tab[1] = y;
     this->Tab[2] = z;
@@ -22,6 +23,16 @@ Wektor<Typ, Rozmiar>::Wektor(Typ tablica[])
 {
     for(int i=0; i<Rozmiar; i++)
         this->Tab[i]=tablica[i];
+}
+template<typename Typ, int Rozmiar>
+Wektor<Typ, Rozmiar>::Wektor(std::initializer_list<Typ> in)
+{
+    int i=0;
+    for (auto & elem : in)
+    {
+        Tab[i] = elem;
+        i++;
+    }
 }
 
 template<typename Typ, int Rozmiar>
