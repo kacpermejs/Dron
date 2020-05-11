@@ -7,9 +7,8 @@
 class Bryla
 {
 protected:
-    MacierzOb MacObX;
-    MacierzOb MacObY;
-    MacierzOb MacObZ;
+    MacierzOb MacOrientacji;
+    
     Wektor<double,3> WekPol; //wektor wspolrzednych srodka obiektu
 public:
     /*!

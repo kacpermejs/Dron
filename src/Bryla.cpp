@@ -1,5 +1,5 @@
 #include "Bryla.hh"
-
+/*
 const MacierzKw<double, 3> Bryla::GetMacierzObrotu(char kierunek)
     {
         switch (kierunek)
@@ -19,4 +19,4 @@ const MacierzKw<double, 3> Bryla::GetMacierzObrotu(char kierunek)
         }
         
         
-    }
+    }*/

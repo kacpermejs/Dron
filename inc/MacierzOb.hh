@@ -12,27 +12,29 @@
 class MacierzOb: public MacierzKw<double, 3>
 {
 protected:
-    double m_kat;
-    char m_kierunek;
+    //double m_kat;
+    //char m_kierunek;
 public:
-    MacierzOb():
-        m_kat(0), m_kierunek('z')
+    MacierzOb()
     {
-        UstawMacierzOb();
+        UstawMacierzOb(0,'z');
     }
 
-    MacierzOb(double kat, char kierunek):
-        m_kat(kat), m_kierunek(kierunek)
+    MacierzOb(double kat, char kierunek)
     {
-        UstawMacierzOb();
+        UstawMacierzOb(kat, kierunek);
+    }
+    MacierzOb(MacierzKw<double,3> Mac2)
+    {
+        UstawMacierz(Mac2);
     }
 
-    void UstawMacierzOb();
+    void UstawMacierzOb(double kat, char kierunek);
 
     void Set(double kat, char kierunek) {(*this)=MacierzOb(kat, kierunek);}
     const MacierzOb Get() const {return *this;}
 
-    const double GetKat() const {return m_kat;}
+    //const double GetKat() const {return m_kat;}
     
 };
 
