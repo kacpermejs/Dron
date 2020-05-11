@@ -23,26 +23,32 @@ void Prostopadloscian::UstawWierzcholki()
             else
                 mz=1;
             Przesuniecie={mx*m_Wymiary[0]/2, my*m_Wymiary[1]/2, mz*m_Wymiary[2]/2};
-            m_Wierzcholki[i]=WekPol+Przesuniecie;
+            m_Wierzcholki[i]=Przesuniecie;
         }
     }
 
 int Prostopadloscian::Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)
 {
+    std::vector < Wektor<double, 3> > Wierzcholki;
+    Wierzcholki.reserve(8);
+    for(unsigned int ind=0; ind < 8; ++ind)
+    {
+        Wierzcholki[ind]=MacObZ*(MacObY*(MacObX*(m_Wierzcholki[ind])))+WekPol;
+    }
     int numer=api->draw_polyhedron(vector<vector<Point3D> >
     {
         {
-            drawNS::Point3D(m_Wierzcholki[0][0], m_Wierzcholki[0][1], m_Wierzcholki[0][2]),
-            drawNS::Point3D(m_Wierzcholki[1][0], m_Wierzcholki[1][1], m_Wierzcholki[1][2]),
-            drawNS::Point3D(m_Wierzcholki[3][0], m_Wierzcholki[3][1], m_Wierzcholki[3][2]),
-            drawNS::Point3D(m_Wierzcholki[2][0], m_Wierzcholki[2][1], m_Wierzcholki[2][2])
+            drawNS::Point3D(Wierzcholki[0][0], Wierzcholki[0][1], Wierzcholki[0][2]),
+            drawNS::Point3D(Wierzcholki[1][0], Wierzcholki[1][1], Wierzcholki[1][2]),
+            drawNS::Point3D(Wierzcholki[3][0], Wierzcholki[3][1], Wierzcholki[3][2]),
+            drawNS::Point3D(Wierzcholki[2][0], Wierzcholki[2][1], Wierzcholki[2][2])
         },
         {   
-            drawNS::Point3D(m_Wierzcholki[4][0], m_Wierzcholki[4][1], m_Wierzcholki[4][2]),
-            drawNS::Point3D(m_Wierzcholki[5][0], m_Wierzcholki[5][1], m_Wierzcholki[5][2]),
+            drawNS::Point3D(Wierzcholki[4][0], Wierzcholki[4][1], Wierzcholki[4][2]),
+            drawNS::Point3D(Wierzcholki[5][0], Wierzcholki[5][1], Wierzcholki[5][2]),
             
-            drawNS::Point3D(m_Wierzcholki[7][0], m_Wierzcholki[7][1], m_Wierzcholki[7][2]),
-            drawNS::Point3D(m_Wierzcholki[6][0], m_Wierzcholki[6][1], m_Wierzcholki[6][2])
+            drawNS::Point3D(Wierzcholki[7][0], Wierzcholki[7][1], Wierzcholki[7][2]),
+            drawNS::Point3D(Wierzcholki[6][0], Wierzcholki[6][1], Wierzcholki[6][2])
 	    }
       }, "blue");//rysuje niebieski Prostopadloscian
 
@@ -52,18 +58,24 @@ int Prostopadloscian::Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)
 
 void Prostopadloscian::obroc(double kat, char kierunek)
 {
-    MacOb=MacierzOb{kat, kierunek};
-    for(unsigned int ind=0; ind < 8; ++ind)
+    switch (kierunek)
     {
-        m_Wierzcholki[ind]=MacOb*(m_Wierzcholki[ind]-WekPol)+WekPol;
+    case 'x':
+        MacObX=MacierzOb{MacObX.GetKat()+kat, kierunek};
+        break;
+    case 'y':
+        MacObY=MacierzOb{MacObY.GetKat()+kat, kierunek};
+        break;
+    case 'z':
+        MacObZ=MacierzOb{MacObZ.GetKat()+kat, kierunek};
+        break;
+    default:
+        std::cerr << "ERROR: Nie ma takiej osi.";
+        break;
     }
 }
 
 void Prostopadloscian::przesun(Wektor<double,3> V)
 {
-    for(unsigned int ind=0; ind < 8; ++ind)
-    {
-        m_Wierzcholki[ind]+=V;
-    }
     WekPol+=V;
 }

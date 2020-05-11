@@ -31,6 +31,8 @@ public:
 
     void Set(double kat, char kierunek) {(*this)=MacierzOb(kat, kierunek);}
     const MacierzOb Get() const {return *this;}
+
+    const double GetKat() const {return m_kat;}
     
 };
 

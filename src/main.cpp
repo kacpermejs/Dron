@@ -115,6 +115,7 @@ int main()
     std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-20,20,-20,20,-20,20,-1)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
     //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
     Dron D1(1,1,1,3,6,4);
+    //Prostopadloscian D1;
     int p;
     char input='0';
     p=D1.Rysuj(api);
@@ -127,7 +128,7 @@ int main()
             input=getchar();
             
             D1.Sterowanie(input);
-            
+            //D1.przesun({1,0,0});
             p=D1.Rysuj(api);
             
             api->redraw();
