@@ -3,38 +3,54 @@
 #define BRYLA
 
 #include "MacierzOb.hh"
+#include "InterfejsRysowania.hh"
 
-class Bryla
+/*!
+ * \brief Klasa wirtualna do tworzenia obiektow 3D
+ * 
+ */
+class Bryla: public InterfejsRysowania
 {
 protected:
-    MacierzOb MacOrientacji;
-    
-    Wektor<double,3> WekPol; //wektor wspolrzednych srodka obiektu
+
+    /*!
+     * \brief Macierz obrotu obiektu wzgledem srodka
+     */
+    MacierzOb m_MacOrientacji;
+
+    /*!
+     * \brief Wektor polozenia srodka bryly 
+     */
+    Wektor<double,3> m_WekPol; //wektor wspolrzednych srodka obiektu
 public:
+
     /*!
     * \brief Konstruktor bezparametryczny tworzy bryle w punkcie (0,0,0)
     */
-    Bryla(): WekPol{0,0,0} {}
+    Bryla(): m_WekPol{0,0,0} {}
+
     /*!
     * \brief Constructor
     * \param WspX - Wspolrzedna X,
     * \param WspY - Wspolrzedna Y,
     * \param WspZ - Wspolrzedna Z,
     */
-    Bryla(double WspX, double WspY, double WspZ): WekPol{WspX, WspY, WspZ} {}
+    Bryla(double WspX, double WspY, double WspZ): m_WekPol{WspX, WspY, WspZ} {}
 
     /*!
     * \brief Setter
     * \param Wek2 - Wektor wspolrzednych,
     * Uzycie: O.SetWekPol({x,y,z});
     */
-    void SetWekPol(Wektor<double,3> Wek2) {this->WekPol=Wek2;}
+    void SetWekPol(Wektor<double,3> Wek2) {this->m_WekPol=Wek2;}
+
     /*!
     * \brief Getter
     * \return WekPol - Wektor wspolrzednych (kopia),
     * Uzycie: O.SetWekPol({x,y,z});
     */
-    const Wektor<double,3> GetWekPol(){return this->WekPol;}
+    const Wektor<double,3> GetWekPol(){return this->m_WekPol;}
+
     /*!
     * \brief Getter dla macierzy obrotu
     * \param kierunek Ktora MacierzOb zwrocic 'x' || 'y' || 'z'
@@ -49,6 +65,7 @@ public:
     * Metoda czysto wirtualna do zdefiniowana w klasie dziedziczacej.
     */
     virtual void obroc(double kat, char kierunek)=0;
+
     /*!
     * \brief Metoda przesuwania bryly
     * \param V Wektor przesuniecia

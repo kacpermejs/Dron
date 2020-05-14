@@ -4,19 +4,19 @@ __start__: DronPodwodny
 	./DronPodwodny
 
 DronPodwodny: 	${OBJ} ${OBJ}/Dr3D_gnuplot_api.o ${OBJ}/main.o ${OBJ}/UkladRownanLiniowych.o ${OBJ}/Macierz.o ${OBJ}/Wektor.o ${OBJ}/LZespolona.o ${OBJ}/AbsV.o\
-				${OBJ}/MacierzOb.o ${OBJ}/InterfejsRysowania.o ${OBJ}/Bryla.o ${OBJ}/Prostopadloscian.o ${OBJ}/Dron.o ${OBJ}/InterfejsDrona.o
+				${OBJ}/MacierzOb.o ${OBJ}/InterfejsRysowania.o ${OBJ}/Bryla.o ${OBJ}/Prostopadloscian.o ${OBJ}/Graniastoslup6.o ${OBJ}/Dron.o ${OBJ}/InterfejsDrona.o
 				
 	g++ -o DronPodwodny ${OBJ}/main.o ${OBJ}/Dr3D_gnuplot_api.o -lpthread\
 						${OBJ}/Wektor.o ${OBJ}/Macierz.o ${OBJ}/UkladRownanLiniowych.o\
 						${OBJ}/LZespolona.o ${OBJ}/AbsV.o\
-						${OBJ}/MacierzOb.o ${OBJ}/InterfejsRysowania.o ${OBJ}/Bryla.o ${OBJ}/Prostopadloscian.o ${OBJ}/Dron.o ${OBJ}/InterfejsDrona.o
+						${OBJ}/MacierzOb.o ${OBJ}/InterfejsRysowania.o ${OBJ}/Bryla.o ${OBJ}/Prostopadloscian.o ${OBJ}/Graniastoslup6.o ${OBJ}/Dron.o ${OBJ}/InterfejsDrona.o
 
 ${OBJ}:
 		mkdir ${OBJ}
 
 ${OBJ}/main.o: src/main.cpp 	inc/Dr3D_gnuplot_api.hh inc/UkladRownanLiniowych.hh inc/Macierz.hh inc/Wektor.hh\
         					inc/rozmiar.h inc/LZespolona.hh inc/AbsV.hh\
-							inc/MacierzOb.hh inc/InterfejsRysowania.hh inc/Bryla.hh inc/Prostopadloscian.hh inc/Dron.hh inc/InterfejsDrona.hh
+							inc/MacierzOb.hh inc/InterfejsRysowania.hh inc/Bryla.hh inc/Prostopadloscian.hh inc/Dron.hh inc/InterfejsDrona.hh inc/Graniastoslup6.hh
 	g++ ${CPPFLAGS} -o  ${OBJ}/main.o src/main.cpp
 
 ${OBJ}/Dr3D_gnuplot_api.o: src/Dr3D_gnuplot_api.cpp inc/Dr3D_gnuplot_api.hh
@@ -51,6 +51,9 @@ ${OBJ}/Bryla.o: src/Bryla.cpp inc/Bryla.hh
 
 ${OBJ}/Prostopadloscian.o: src/Prostopadloscian.cpp inc/Prostopadloscian.hh
 	g++ ${CPPFLAGS} -o ${OBJ}/Prostopadloscian.o src/Prostopadloscian.cpp
+
+${OBJ}/Graniastoslup6.o: src/Graniastoslup6.cpp inc/Graniastoslup6.hh
+	g++ ${CPPFLAGS} -o ${OBJ}/Graniastoslup6.o src/Graniastoslup6.cpp
 
 ${OBJ}/Dron.o: src/Dron.cpp inc/Dron.hh
 	g++ ${CPPFLAGS} -o ${OBJ}/Dron.o src/Dron.cpp

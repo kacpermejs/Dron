@@ -27,15 +27,15 @@ void Prostopadloscian::UstawWierzcholki()
         }
     }
 
-int Prostopadloscian::Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)
+void Prostopadloscian::Rysuj()
 {
     std::vector < Wektor<double, 3> > Wierzcholki;
     Wierzcholki.reserve(8);
     for(unsigned int ind=0; ind < 8; ++ind)
     {
-        Wierzcholki[ind]=MacOrientacji*m_Wierzcholki[ind]+WekPol;
+        Wierzcholki[ind]=m_MacOrientacji*m_Wierzcholki[ind]+m_WekPol;
     }
-    int numer=api->draw_polyhedron(vector<vector<Point3D> >
+    m_Numer=this->api->draw_polyhedron(vector<vector<Point3D> >
     {
         {
             drawNS::Point3D(Wierzcholki[0][0], Wierzcholki[0][1], Wierzcholki[0][2]),
@@ -51,17 +51,17 @@ int Prostopadloscian::Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)
 	    }
       }, "blue");//rysuje niebieski Prostopadloscian
 
-    return numer;
+    //return numer;
 
 }
 
 void Prostopadloscian::obroc(double kat, char kierunek)
 {
     assert(kierunek=='x' || kierunek=='y' || kierunek=='z');
-    MacOrientacji*=MacierzOb(kat, kierunek);    
+    m_MacOrientacji*=MacierzOb(kat, kierunek);    
 }
 
 void Prostopadloscian::przesun(Wektor<double,3> V)
 {
-    WekPol+=V;
+    m_WekPol+=V;
 }

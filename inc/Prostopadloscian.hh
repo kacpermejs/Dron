@@ -3,11 +3,10 @@
 #define PROSTOPADLOSCIAN
 
 #include "Bryla.hh"
-#include "InterfejsRysowania.hh"
 
 
 class Prostopadloscian:
-    public Bryla, InterfejsRysowania
+    public Bryla
 {
 protected:
     Wektor<double, 3> m_Wymiary; //(x,y,z)
@@ -28,7 +27,7 @@ public:
 
     void UstawWierzcholki();
 
-    int Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api) override;
+    void Rysuj() override;
 
     virtual void obroc(double kat, char kierunek)override;
     virtual void przesun(Wektor<double,3> V)override;
