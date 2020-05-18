@@ -13,7 +13,7 @@ void Graniastoslup6::UstawWierzcholki()
         {
             if(i<6)
             {
-                Przesuniecie=MacierzOb(kat, 'z')*Wektor<double,3>{m_promien,0,(m_wysokosc)/2};
+                Przesuniecie=MacierzOb(kat, 'z')*Wektor<double,3>{m_promien,0,-1*(m_wysokosc)/2};
                 kat+=60;
             }
             else
@@ -33,7 +33,7 @@ void Graniastoslup6::Rysuj()
     std::vector < Wektor<double, 3> > Wierzcholki;
     Wierzcholki.reserve(12);
 
-    for(unsigned int ind=6; ind < 12; ++ind)
+    for(unsigned int ind=0; ind < 12; ++ind)
     {
         Wierzcholki[ind]=m_MacOrientacji*m_Wierzcholki[ind]+m_WekPol;
         std::cout << Wierzcholki[ind] << "                        " <<ind << "\n";

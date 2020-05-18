@@ -95,7 +95,7 @@ int main() {
 
 */
 
-
+/*
 int main()
 {
     //std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-20,20,-20,20,-20,20,-1)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
@@ -120,12 +120,12 @@ int main()
 	}
   //delete api;//dla zwykłych wskaźników musimy posprzątać
 }
-/*
+*/
 #include "Graniastoslup6.hh"
 
 int main()
 {
-    Prostopadloscian G1(0,0,0,10,5, 15);
+    Graniastoslup6 G1(0,0,0,0,5);
     char input='0';
     G1.Rysuj();
 
@@ -151,4 +151,3 @@ int main()
 
 
 }
-*/
