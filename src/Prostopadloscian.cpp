@@ -27,27 +27,32 @@ void Prostopadloscian::UstawWierzcholki()
         }
     }
 
-void Prostopadloscian::Rysuj()
+void Prostopadloscian::UstawGlobalne()
 {
-    std::vector < Wektor<double, 3> > Wierzcholki;
-    Wierzcholki.reserve(8);
+    
     for(unsigned int ind=0; ind < 8; ++ind)
     {
-        Wierzcholki[ind]=m_MacOrientacji*m_Wierzcholki[ind]+m_WekPol;
+        m_WierzcholkiGlobalne[ind]=m_MacOrientacji*m_Wierzcholki[ind]+m_WekPol;
     }
+}
+
+void Prostopadloscian::Rysuj()
+{
+    
+    UstawGlobalne();
     m_Numer=this->api->draw_polyhedron(vector<vector<Point3D> >
     {
         {
-            drawNS::Point3D(Wierzcholki[0][0], Wierzcholki[0][1], Wierzcholki[0][2]),
-            drawNS::Point3D(Wierzcholki[1][0], Wierzcholki[1][1], Wierzcholki[1][2]),
-            drawNS::Point3D(Wierzcholki[3][0], Wierzcholki[3][1], Wierzcholki[3][2]),
-            drawNS::Point3D(Wierzcholki[2][0], Wierzcholki[2][1], Wierzcholki[2][2])
+            drawNS::Point3D(m_WierzcholkiGlobalne[0][0], m_WierzcholkiGlobalne[0][1], m_WierzcholkiGlobalne[0][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[1][0], m_WierzcholkiGlobalne[1][1], m_WierzcholkiGlobalne[1][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[3][0], m_WierzcholkiGlobalne[3][1], m_WierzcholkiGlobalne[3][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[2][0], m_WierzcholkiGlobalne[2][1], m_WierzcholkiGlobalne[2][2])
         },
         {   
-            drawNS::Point3D(Wierzcholki[4][0], Wierzcholki[4][1], Wierzcholki[4][2]),
-            drawNS::Point3D(Wierzcholki[5][0], Wierzcholki[5][1], Wierzcholki[5][2]),
-            drawNS::Point3D(Wierzcholki[7][0], Wierzcholki[7][1], Wierzcholki[7][2]),
-            drawNS::Point3D(Wierzcholki[6][0], Wierzcholki[6][1], Wierzcholki[6][2])
+            drawNS::Point3D(m_WierzcholkiGlobalne[4][0], m_WierzcholkiGlobalne[4][1], m_WierzcholkiGlobalne[4][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[5][0], m_WierzcholkiGlobalne[5][1], m_WierzcholkiGlobalne[5][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[7][0], m_WierzcholkiGlobalne[7][1], m_WierzcholkiGlobalne[7][2]),
+            drawNS::Point3D(m_WierzcholkiGlobalne[6][0], m_WierzcholkiGlobalne[6][1], m_WierzcholkiGlobalne[6][2])
 	    }
       }, "blue");//rysuje niebieski Prostopadloscian
 

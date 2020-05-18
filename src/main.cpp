@@ -1,10 +1,9 @@
 #include <iostream>
-
-#include <sys/ioctl.h>
-#include <termios.h>
+#include <unistd.h>
 
 #include "Dr3D_gnuplot_api.hh"
 #include "Dron.hh"
+#include "Plaszczyzna.hh"
 
 
 using std::vector;
@@ -15,22 +14,7 @@ using std::endl;
 
 
 
-bool kbhit()
-{
-    termios term;
-    tcgetattr(0, &term);
 
-    termios term2 = term;
-    term2.c_lflag &= ~ICANON;
-    tcsetattr(0, TCSANOW, &term2);
-
-    int byteswaiting;
-    ioctl(0, FIONREAD, &byteswaiting);
-
-    tcsetattr(0, TCSANOW, &term);
-
-    return byteswaiting > 0;
-}
 
 void wait4key()
 {
@@ -111,40 +95,37 @@ int main() {
 
 */
 
-/*
+
 int main()
 {
     //std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-20,20,-20,20,-20,20,-1)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
     //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
-    Dron D1(1,1,1,3,6,4);
+    Dron D1;
     //Prostopadloscian D1;
-    
+    //Plaszczyzna P1(20,20,0,0,10);
+
     char input='0';
     D1.Rysuj();
+    //P1.Rysuj();
 
-    while(input!='k')
-    {   
-        if(kbhit())
-        {
-            InterfejsRysowania::Usun(D1.GetNumer());
-            input=getchar();
-            
-            D1.Sterowanie(input);
-            //D1.przesun({1,0,0});
-            D1.Rysuj();
-            
-            InterfejsRysowania::Odswiez();
-        }
+	while(input!='k')
+	{
+		//InterfejsRysowania::Usun(D1.GetNumer());
+		input=D1.Input();
+		D1.Sterowanie();
+		D1.RysowaieDrona();
+		InterfejsRysowania::Odswiez();
+		usleep(250);
 
-    }
+	}
   //delete api;//dla zwykłych wskaźników musimy posprzątać
 }
-*/
+/*
 #include "Graniastoslup6.hh"
 
 int main()
 {
-    Graniastoslup6 G1(0,0,0,10,10);
+    Prostopadloscian G1(0,0,0,10,5, 15);
     char input='0';
     G1.Rysuj();
 
@@ -157,7 +138,7 @@ int main()
             
             //G1.przesun({1,0,0});
             G1.Rysuj();
-            G1.obroc(5, 'x');
+            G1.obroc(5, 'y');
             //wait4key();
             //G1.obroc(5, 'z');
             
@@ -170,3 +151,4 @@ int main()
 
 
 }
+*/

@@ -56,7 +56,19 @@ public:
     * \param kierunek Ktora MacierzOb zwrocic 'x' || 'y' || 'z'
     * \return MacObX/MacObY/MacObZ - Macierz obrotu bryly zalezna od wybranego kierunku,
     */
-    const MacierzKw<double, 3> GetMacierzObrotu(char kierunek);
+    const MacierzKw<double, 3> GetMacierzObrotu()
+    {
+        return m_MacOrientacji;
+    }
+
+    /*!
+    * \brief Setter dla macierzy obrotu
+    * \param MacOb2 macierz ktora trzeba skopiowac
+    */
+    void SetMacierzObrotu(MacierzOb MacOb2)
+    {
+        m_MacOrientacji=MacOb2;
+    }
 
     /*!
     * \brief Metoda obracania bryly

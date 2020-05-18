@@ -11,10 +11,12 @@ class Prostopadloscian:
 protected:
     Wektor<double, 3> m_Wymiary; //(x,y,z)
     std::vector < Wektor<double, 3> > m_Wierzcholki;
+    std::vector < Wektor<double, 3> > m_WierzcholkiGlobalne;
 public:
     Prostopadloscian(): m_Wymiary{1,2,3}
     {
         m_Wierzcholki.reserve(8);
+        m_WierzcholkiGlobalne.reserve(8);
         UstawWierzcholki();
     }
     
@@ -22,12 +24,15 @@ public:
     Bryla{WspX, WspY, WspZ}, m_Wymiary{WymX,WymY,WymZ}
     {
         m_Wierzcholki.reserve(8);
+        m_WierzcholkiGlobalne.reserve(8);
         UstawWierzcholki();
     }
 
     void UstawWierzcholki();
 
     void Rysuj() override;
+
+    void UstawGlobalne();
 
     virtual void obroc(double kat, char kierunek)override;
     virtual void przesun(Wektor<double,3> V)override;

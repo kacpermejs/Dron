@@ -17,7 +17,7 @@ void MacierzOb::UstawMacierzOb(double kat, char kierunek)
             {
                 {cos(kat*PI/180),0,-sin(kat*PI/180)},
                 {0,1,0},
-                {sin(kat*PI/180),cos(kat*PI/180), 0}
+                {sin(kat*PI/180),0, cos(kat*PI/180)}
             });
             break;
         case 'z':
