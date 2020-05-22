@@ -5,7 +5,7 @@ void MacierzOb::UstawMacierzOb(double kat, char kierunek)
     switch (kierunek)
         {
         case 'x':
-            UstawMacierz(MacierzKw<double,3>
+            UstawMacierz(Macierz3D
             {
                 {1,0,0},
                 {0,cos(kat*PI/180),sin(kat*PI/180)},
@@ -13,7 +13,7 @@ void MacierzOb::UstawMacierzOb(double kat, char kierunek)
             });
             break;
         case 'y':
-            UstawMacierz(MacierzKw<double,3>
+            UstawMacierz(Macierz3D
             {
                 {cos(kat*PI/180),0,-sin(kat*PI/180)},
                 {0,1,0},
@@ -21,7 +21,7 @@ void MacierzOb::UstawMacierzOb(double kat, char kierunek)
             });
             break;
         case 'z':
-            UstawMacierz(MacierzKw<double,3>
+            UstawMacierz(Macierz3D
             {
                 {cos(kat*PI/180),sin(kat*PI/180),0},
                 {-sin(kat*PI/180),cos(kat*PI/180), 0},
@@ -30,7 +30,7 @@ void MacierzOb::UstawMacierzOb(double kat, char kierunek)
             break;
         
         default:
-            MacierzKw
+            Macierz3D
             {
                 {cos(kat*PI/180),sin(kat*PI/180),0},
                 {-sin(kat*PI/180),cos(kat*PI/180), 0},

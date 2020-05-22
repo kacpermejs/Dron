@@ -9,6 +9,9 @@
 
 #define PI 3.14159265
 
+typedef Wektor<double,3> Wektor3D;
+typedef MacierzKw<double,3> Macierz3D;
+
 class MacierzOb: public MacierzKw<double, 3>
 {
 protected:
@@ -24,7 +27,7 @@ public:
     {
         UstawMacierzOb(kat, kierunek);
     }
-    MacierzOb(MacierzKw<double,3> Mac2)
+    MacierzOb(Macierz3D Mac2)
     {
         UstawMacierz(Mac2);
     }

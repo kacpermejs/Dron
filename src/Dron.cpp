@@ -37,62 +37,59 @@ void Dron::Sterowanie()
 
 void Dron::RysowaieDrona()
 {
-    InterfejsRysowania::Usun(this->GetNumer());
-    InterfejsRysowania::Usun(m_WirnikLewy.GetNumer());
-    InterfejsRysowania::Usun(m_WirnikPrawy.GetNumer());
     this->Rysuj();
-    m_WirnikLewy.Rysuj();
-    m_WirnikPrawy.Rysuj();
+    L.Rysuj();
+    P.Rysuj();
+    L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
+    P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
+    L.obroc_z_dronem(m_MacOrientacji);
+    P.obroc_z_dronem(m_MacOrientacji);
+    
 }
 
 void Dron::AnimacjaWynurzania()
 {
     przesun(m_MacOrientacji*Wektor<double, 3>{0,0,0.1});
-    //obroc(20,'x');
-    this->m_WirnikLewy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0,0.1});
-    this->m_WirnikPrawy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0,0.1});
 }
 
 void Dron::AnimacjaZanurzania()
 {
     przesun(m_MacOrientacji*Wektor<double, 3>{0,0,-0.1});
-    //obroc(-20,'x');
-    this->m_WirnikLewy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0,-0.1});
-    this->m_WirnikPrawy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0,-0.1});
+    
+    
 }
 
 void Dron::PlynPrzod()
 {
-    przesun(m_MacOrientacji*Wektor<double, 3>{0,0.1,0});
-    this->m_WirnikLewy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0.1,0});
-    this->m_WirnikPrawy.przesun(m_MacOrientacji*Wektor<double, 3>{0,0.1,0});
-    m_WirnikLewy.obroc(30,'y');
-    m_WirnikPrawy.obroc(-30,'y');
+    przesun(m_MacOrientacji*Wektor<double, 3>{0.1,0,0});
+    L.krec(10);
+    P.krec(-10);
     Przod=0;
 }
 
 void Dron::PlynTyl()
 {
-    przesun(m_MacOrientacji*Wektor<double, 3>{0,-0.1,0});
-    this->m_WirnikLewy.przesun(m_MacOrientacji*Wektor<double, 3>{0,-0.1,0});
-    this->m_WirnikPrawy.przesun(m_MacOrientacji*Wektor<double, 3>{0,-0.1,0});
-    m_WirnikLewy.obroc(-30,'y');
-    m_WirnikPrawy.obroc(30,'y');
+    przesun(m_MacOrientacji*Wektor<double, 3>{-0.1,0,0});
+    L.krec(-10);
+    P.krec(10);
     Tyl=0;
 }
 
 void Dron::SkrecLewo()
 {
     obroc(2,'z');
-    m_WirnikLewy.SetWekPol(MacierzOb(2,'z')*m_WirnikLewy.GetWekPol());
-    m_WirnikPrawy.SetWekPol(MacierzOb(2,'z')*m_WirnikPrawy.GetWekPol());
     Lewo=0;
 }
 
 void Dron::SkrecPrawo()
 {
     obroc(-2,'z');
-    m_WirnikLewy.SetWekPol(MacierzOb(-2,'z')*m_WirnikLewy.GetWekPol());
-    m_WirnikPrawy.SetWekPol(MacierzOb(-2,'z')*m_WirnikPrawy.GetWekPol());
     Prawo=0;
+}
+
+void Dron::WymazDrona()
+{
+    InterfejsRysowania::Usun(this->GetNumer());
+    InterfejsRysowania::Usun(L.GetNumer());
+    InterfejsRysowania::Usun(P.GetNumer());
 }

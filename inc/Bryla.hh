@@ -21,7 +21,7 @@ protected:
     /*!
      * \brief Wektor polozenia srodka bryly 
      */
-    Wektor<double,3> m_WekPol; //wektor wspolrzednych srodka obiektu
+    Wektor3D m_WekPol; //wektor wspolrzednych srodka obiektu
 public:
 
     /*!
@@ -30,7 +30,13 @@ public:
     Bryla(): m_WekPol{0,0,0} {}
 
     /*!
-    * \brief Constructor
+    * \brief Konstruktor przyjmujący obiekt klasy wektor
+    * \param wek - Wektor wspolrzednych,
+    */
+    Bryla(Wektor3D wek): m_WekPol(wek) {}
+
+    /*!
+    * \brief Konstruktor przyjmujący 3 wspolrzedne
     * \param WspX - Wspolrzedna X,
     * \param WspY - Wspolrzedna Y,
     * \param WspZ - Wspolrzedna Z,
@@ -42,14 +48,14 @@ public:
     * \param Wek2 - Wektor wspolrzednych,
     * Uzycie: O.SetWekPol({x,y,z});
     */
-    void SetWekPol(Wektor<double,3> Wek2) {this->m_WekPol=Wek2;}
+    void SetWekPol(Wektor3D Wek2) {this->m_WekPol=Wek2;}
 
     /*!
     * \brief Getter
     * \return WekPol - Wektor wspolrzednych (kopia),
     * Uzycie: O.SetWekPol({x,y,z});
     */
-    const Wektor<double,3> GetWekPol(){return this->m_WekPol;}
+    const Wektor3D GetWekPol(){return this->m_WekPol;}
 
     /*!
     * \brief Getter dla macierzy obrotu
@@ -83,7 +89,7 @@ public:
     * \param V Wektor przesuniecia
     * Metoda czysto wirtualna do zdefiniowana w klasie dziedziczacej.
     */
-    virtual void przesun(Wektor<double,3> V)=0;
+    virtual void przesun(Wektor3D V)=0;
 
 };
 

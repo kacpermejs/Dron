@@ -95,37 +95,36 @@ int main() {
 
 */
 
-/*
+
 int main()
 {
     //std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-20,20,-20,20,-20,20,-1)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
     //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
     Dron D1;
     //Prostopadloscian D1;
-    //Plaszczyzna P1(20,20,0,0,10);
+    Plaszczyzna P1(40,40,0,0,19);
 
     char input='0';
     D1.Rysuj();
-    //P1.Rysuj();
-
+    P1.Rysuj();
+    
 	while(input!='k')
 	{
-		//InterfejsRysowania::Usun(D1.GetNumer());
 		input=D1.Input();
 		D1.Sterowanie();
+    D1.WymazDrona();
 		D1.RysowaieDrona();
 		InterfejsRysowania::Odswiez();
-		usleep(250);
 
 	}
   //delete api;//dla zwykłych wskaźników musimy posprzątać
 }
-*/
-#include "Graniastoslup6.hh"
 
+
+/*
 int main()
 {
-    Graniastoslup6 G1(0,0,0,0,5);
+    Prostopadloscian G1;
     char input='0';
     G1.Rysuj();
 
@@ -150,4 +149,4 @@ int main()
 
 
 
-}
+}*/
