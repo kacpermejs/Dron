@@ -102,20 +102,24 @@ int main()
     //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
     Dron D1;
     //Prostopadloscian D1;
-    Plaszczyzna P1(40,40,0,0,19);
+    Plaszczyzna Powierzchnia(40,40,0,0,19);
+    Plaszczyzna Dno(40,40,0,0,-19);
 
     char input='0';
     D1.Rysuj();
-    P1.Rysuj();
+    Powierzchnia.Rysuj();
+    Dno.Rysuj();
     
 	while(input!='k')
 	{
+    system("clear");
+    D1.UI();
 		input=D1.Input();
 		D1.Sterowanie();
     D1.WymazDrona();
 		D1.RysowaieDrona();
 		InterfejsRysowania::Odswiez();
-
+    usleep(50000);
 	}
   //delete api;//dla zwykłych wskaźników musimy posprzątać
 }

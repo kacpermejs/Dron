@@ -10,6 +10,7 @@ protected:
 
     /*!
      * \brief Wskaznik na API gnuplota
+     * definicja parametrow wyswietlania w pliku RysowanieUstawienia.hh
      */
     static std::shared_ptr<drawNS::Draw3DAPI> api;
 

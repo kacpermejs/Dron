@@ -77,7 +77,7 @@ public:
     }
 
     /*!
-    * \brief Metoda obracania bryly
+    * \brief Metoda wirtualna obracania bryly
     * \param kat Kat obrotu w stopniach,
     * \param kierunek W okol ktorej osi obracac (char) 'x' || 'y' || 'z',
     * Metoda czysto wirtualna do zdefiniowana w klasie dziedziczacej.
@@ -85,7 +85,7 @@ public:
     virtual void obroc(double kat, char kierunek)=0;
 
     /*!
-    * \brief Metoda przesuwania bryly
+    * \brief Metoda wirtualna przesuwania bryly
     * \param V Wektor przesuniecia
     * Metoda czysto wirtualna do zdefiniowana w klasie dziedziczacej.
     */

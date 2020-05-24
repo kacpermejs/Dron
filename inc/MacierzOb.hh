@@ -12,32 +12,55 @@
 typedef Wektor<double,3> Wektor3D;
 typedef MacierzKw<double,3> Macierz3D;
 
+/*!
+ * \brief Klasa dodajaca do Macierzy3D opcje Maciery obrotu
+ */
 class MacierzOb: public MacierzKw<double, 3>
 {
-protected:
-    //double m_kat;
-    //char m_kierunek;
 public:
+/*!
+ * \brief Konstruktor bezparametryczny tworzy macierz obrotu o kacie 0
+ */
     MacierzOb()
     {
         UstawMacierzOb(0,'z');
     }
 
+/*!
+ * \brief Konstruktor tworzacy macierz obrotu o kat w okol wybranej osi
+ * \param kat kat obrotu w stopniach [deg]
+ * \param kierunek os obrotu
+ */
     MacierzOb(double kat, char kierunek)
     {
         UstawMacierzOb(kat, kierunek);
     }
+
+/*!
+ * \brief Konstruktor umozliwiajacy utworzenie macierzy obrotu kopiujac zwykla
+ * \param Mac2 macierz do skopiowania
+ */
     MacierzOb(Macierz3D Mac2)
     {
         UstawMacierz(Mac2);
     }
 
+/*!
+ * \brief Metoda ustawiajaca wartosci wmacierzy obrotu
+ * Uzywana tylko w konstruktorze 
+ */
     void UstawMacierzOb(double kat, char kierunek);
-
+/*!
+ * \brief Setter
+ * \param kat kat obrotu w stopniach [deg]
+ * \param kierunek os obrotu
+ */
     void Set(double kat, char kierunek) {(*this)=MacierzOb(kat, kierunek);}
-    const MacierzOb Get() const {return *this;}
 
-    //const double GetKat() const {return m_kat;}
+/*!
+ * \brief Getter
+ */
+    const MacierzOb Get() const {return *this;}
     
 };
 

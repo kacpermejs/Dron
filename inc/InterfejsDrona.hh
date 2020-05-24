@@ -11,9 +11,14 @@ bool kbhit();
 class InterfejsDrona
 {
 protected:
-    bool Przod=0, Tyl=0, Lewo=0, Prawo=0, Wynurz=0, Zanurz=0;
+    bool Plynie, Skreca, Pochylanie;
+
+    double m_odleglosc;
+    double m_katZ;
+    double m_katY;
     
 public:
+    InterfejsDrona(): Plynie(0), Skreca(0), Pochylanie(0), m_odleglosc(0), m_katZ(0), m_katY(0) {}
     char Input();
 
     void UI();

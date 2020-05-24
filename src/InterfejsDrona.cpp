@@ -17,68 +17,53 @@ bool kbhit()
     return byteswaiting > 0;
 }
 
-//enum opcje{PRZOD=0,TYL,PRAWO,LEWO};
+
 
 char InterfejsDrona::Input()
 {
     char key;
+    
     if(kbhit())
     {
         key=getchar();
+
         switch (key)
-        {//=============================
-        case 'w':
         {
-            if(Tyl==1)
-                Tyl=0;
-            else
-                Przod=1;
-                      
+        case 'p':
+            std::cout << "Podaj odleglosc:\n";
+            std::cin >> m_odleglosc;
+            std::cout << "Podaj kat:\n";
+            std::cin >> m_katY;
+            Plynie=1;
             break;
-        }//=============================
-        case 's':
-        {
-            if(Przod==1)
-                Przod=0;
-            else
-                Tyl=1;
-            
+        
+        case 'o':
+            std::cout << "Podaj kat obrotu:\n";
+            std::cin >> m_katZ;
+            Skreca=1;
             break;
-        }//=============================
-        case 'a':
-        {
-            Lewo=1;
-            
-            break;
-        }//=============================
-        case 'd':
-        {
-            Prawo=1;
-            
-            break;
-        }//=============================
-        case '=':
-        {
-            if(Zanurz==1)
-                Zanurz=0;
-            else
-                Wynurz=1;
-            
-            break;
-        }//=============================
-        case '-':
-        {
-            if(Wynurz==1)
-                Wynurz=0;
-            else
-                Zanurz=1;
-            
-            break;
-        }//=============================
+        
         default:
             break;
         }
+        
         return key;
     }
     return '0';
+}
+
+void InterfejsDrona::UI()
+{
+    std::cout << "Dostepne opcje:\n"
+                << "\t 'p' - plyn\n"
+                << "\t 'o' - obroc\n";
+
+    std::cout << "aktualne zadanie:\n";
+    if(Plynie)
+        std::cout << "\tplynie, odleglosc:" << m_odleglosc << " pod katem " << m_katY << "\n";
+    else if(Skreca)
+        std::cout << "\tskreca, kat:" << m_katZ << "\n";
+    else
+        std::cout << "stoi\n";
+
 }
