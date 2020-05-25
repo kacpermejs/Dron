@@ -12,6 +12,7 @@ void Plaszczyzna::UstawPunktyGlobalnie()
 
     for(int i=0; i<=m_wymiarX/5; ++i)
     {
+        Temp.clear();
         for(int j=0; j<=m_wymiarY/5; ++j)
         {
             wek1=m_MacierzOrientacji*Wektor3D{x,y,0}+m_punktPodstawowy;
