@@ -23,13 +23,11 @@ void Dron::Sterowanie()
     }
 }
 
-void Dron::RysowaieDrona()
+void Dron::Rysuj()
 {
-    this->Rysuj();
+    Prostopadloscian::Rysuj();
     L.Rysuj();
     P.Rysuj();
-    
-    
 }
 
 void Dron::Plyn(double & odleglosc, double & kat)
@@ -128,54 +126,9 @@ void Dron::Skrec(double & kat)
     P.obroc_z_dronem(m_MacOrientacji);
 }
 
-
-/*
-void Dron::AnimacjaWynurzania()
+void Dron::Usun()
 {
-    przesun(m_MacOrientacji*Wektor<double, 3>{0,0,0.1});
-}
-
-void Dron::AnimacjaZanurzania()
-{
-    przesun(m_MacOrientacji*Wektor<double, 3>{0,0,-0.1});
-    
-    
-}*/
-
-/*
-void Dron::PlynPrzod()
-{
-    przesun(m_MacOrientacji*Wektor<double, 3>{0.1,0,0});
-    L.krec(10);
-    P.krec(-10);
-    Przod=0;
-}
-
-void Dron::PlynTyl()
-{
-    przesun(m_MacOrientacji*Wektor<double, 3>{-0.1,0,0});
-    L.krec(-10);
-    P.krec(10);
-    Tyl=0;
-}
-*/
-
-/*
-void Dron::SkrecLewo()
-{
-    obroc(2,'z');
-    Lewo=0;
-}
-
-void Dron::SkrecPrawo()
-{
-    obroc(-2,'z');
-    Prawo=0;
-}*/
-
-void Dron::WymazDrona()
-{
-    InterfejsRysowania::Usun(this->GetNumer());
-    InterfejsRysowania::Usun(L.GetNumer());
-    InterfejsRysowania::Usun(P.GetNumer());
+    Prostopadloscian::Usun();
+    L.Usun();
+    P.Usun();
 }

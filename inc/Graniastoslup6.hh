@@ -72,6 +72,7 @@ public:
  */
     void Rysuj() override;
 
+
 /*!
  * \brief Metoda obracania dziedziczona wirtualnie z klasy Bryla 
  */

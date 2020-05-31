@@ -22,6 +22,10 @@ class Dron: public InterfejsDrona, public Prostopadloscian
  * \brief Sruba prawa
  */
     Sruba P;
+/*!
+ * \brief promien obszaru kolizji 
+ */
+    double m_promien;
 public:
 
 /*!
@@ -29,13 +33,14 @@ public:
  */
     Dron():
         Prostopadloscian(0,0,0,WymiarXdrona,WymiarYdrona,WymiarZdrona), 
-        L(Wektor3D{-WymiarXdrona/2,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{-WymiarXdrona/2,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         L.obroc_z_dronem(m_MacOrientacji);
         P.obroc_z_dronem(m_MacOrientacji);
+        m_promien=(m_Wymiary[0]/2)+WYS_SRUBY;
     }
 
 /*!
@@ -46,13 +51,14 @@ public:
  */
     Dron(double WspX, double WspY, double WspZ):
         Prostopadloscian(WspX, WspY, WspZ,WymiarXdrona,WymiarYdrona,WymiarZdrona), 
-        L(Wektor3D{-WymiarXdrona/2,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{-WymiarXdrona/2,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         L.obroc_z_dronem(m_MacOrientacji);
         P.obroc_z_dronem(m_MacOrientacji);
+        m_promien=(m_Wymiary[0]/2)+WYS_SRUBY;
     }
 
 /*!
@@ -66,24 +72,25 @@ public:
  */
     Dron(double WspX, double WspY, double WspZ, double WymX, double WymY, double WymZ):
         Prostopadloscian(WspX, WspY, WspZ, WymX, WymY, WymZ),
-        L(Wektor3D{-WymX/2,WymY/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{-WymX/2,-WymY/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymX/2)-WYS_SRUBY,WymY/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymX/2)-WYS_SRUBY,-WymY/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         L.obroc_z_dronem(m_MacOrientacji);
         P.obroc_z_dronem(m_MacOrientacji);
+        m_promien=(m_Wymiary[0]/2)+WYS_SRUBY;
     }
 
 /*!
  * \brief Metoda rysujaca calego drona ze srubami
  */
-    void RysowaieDrona();
+    void Rysuj()override;
 
 /*!
  * \brief Wymazujaca calego drona ze srubami
  */
-    void WymazDrona();
+    void Usun()override;
 
 /*!
  * \brief Metoda sterujaca dronem
@@ -105,13 +112,21 @@ public:
  */
     void Skrec(double & kat);
 
-    //void AnimacjaWynurzania();
-    //void AnimacjaZanurzania();
-    //void PlynPrzod();
-    //void PlynTyl();
-    
-    //void SkrecLewo();
-    //void SkrecPrawo();
+/*!
+ * \brief metoda zwracająca promien drona (wirtualna z interfejsu)
+ */
+    const double zwrocPromien()const override
+    {
+        return m_promien;
+    }
+
+/*!
+ * \brief metoda zwracająca srodek drona (wirtualna z interfejsu)
+ */
+    const Wektor3D zwrocSrodek()const override
+    {
+        return m_WekPol;
+    }
     
 };
 

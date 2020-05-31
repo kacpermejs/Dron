@@ -22,27 +22,29 @@ protected:
     double m_wymiarY;
 
 /*!
- * \brief Macierz obrotu plaszczyzny
- */
-    MacierzOb m_MacierzOrientacji;
-
-/*!
  * \brief Wektor polozenia srodka plaszczyzny
  */
     Wektor3D m_punktPodstawowy;
 
 /*!
+ * \brief Macierz obrotu plaszczyzny
+ */
+    MacierzOb m_MacierzOrientacji;
+
+/*!
  * \brief tablica punktow globalnych plaszczyzny
  */
     std::vector<std::vector<drawNS::Point3D>> m_punkty;
+
 //===========================================================================================
+
 public:
 
 /*!
  * \brief Konstruktor bezparametryczny przykladowej plaszczyzny
  */
     Plaszczyzna():
-        m_wymiarX(10), m_wymiarY(10), m_MacierzOrientacji(), m_punktPodstawowy({0,0,0})
+        m_wymiarX(10), m_wymiarY(10), m_punktPodstawowy({0,0,0}), m_MacierzOrientacji()
     {
         //m_punkty.reserve(m_wymiarX*m_wymiarY);
         UstawPunktyGlobalnie();
@@ -67,6 +69,7 @@ public:
  * \brief Metoda rysowania dziedziczona wirtualnie z klasy InterfejsRysowania 
  */
     void Rysuj()override;
+
 
 /*!
  * \brief Metoda Ustawiania punktow plaszczyzny

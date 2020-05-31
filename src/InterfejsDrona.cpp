@@ -64,6 +64,9 @@ void InterfejsDrona::UI()
     else if(Skreca)
         std::cout << "\tskreca, kat:" << m_katZ << "\n";
     else
-        std::cout << "stoi\n";
+        std::cout << "stoi w miejscu\n";
+
+    std::cout << "kolizja:" << Kolizja << "\n";
+        
 
 }

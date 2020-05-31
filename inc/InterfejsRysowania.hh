@@ -26,15 +26,11 @@ public:
     virtual void Rysuj() = 0;
 
     /*!
-     * \brief Usuwanie obiektu o zadanym numerze
-     * \param numer - numer obiektu do usuniecia
+     * \brief Usuwanie (wymazywanie) obiektu z wykresu
      * Obiekt usuwa sie tylko z wykresu gnuplota
-     * Urzywanie przy zmianie polozenia
+     * Uzywane przy zmianie polozenia
      */
-    static void Usun(int numer)
-    {
-        api->erase_shape(numer);
-    }
+    virtual void Usun();
 
     /*!
      * \brief Metoda odswiezania gnuplota

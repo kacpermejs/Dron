@@ -3,6 +3,9 @@
 
 #include "Graniastoslup6.hh"
 
+#define WYS_SRUBY 1
+#define PR_SRUBY 1
+
 /*!
  * \brief Klasa opisujaca sruby dla drona
  */
@@ -31,7 +34,7 @@ public:
         m_przes_mocowania(pr_mocowania), m_orient_mocowania(or_mocowania), kat_obrotu_sruby(0)
         
     {
-        Graniastoslup6(m_przes_mocowania, 1, 1);
+        Graniastoslup6(m_przes_mocowania, WYS_SRUBY, PR_SRUBY);
     }
 /*!
  * \brief Metoda krecenia sruba
