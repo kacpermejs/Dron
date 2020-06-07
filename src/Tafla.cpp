@@ -7,3 +7,8 @@ bool Tafla::czy_kolizja(std::shared_ptr<InterfejsDrona> D)
     else
         return 0;
 }
+
+void Tafla::Rysuj()
+{
+    Plaszczyzna::Rysuj();
+}

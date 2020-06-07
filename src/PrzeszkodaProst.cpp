@@ -21,7 +21,11 @@ bool PrzeszkodaProst::czy_kolizja(std::shared_ptr<InterfejsDrona> D)
                 
         }
     }
-    else
-        return 0;
+    return 0;
 
+}
+
+void PrzeszkodaProst::Rysuj()
+{
+    Prostopadloscian::Rysuj();
 }

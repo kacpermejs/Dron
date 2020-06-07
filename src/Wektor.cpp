@@ -1,9 +1,16 @@
 #include "Wektor.hh"
 
+template<typename Typ, int Rozmiar>
+int Wektor<Typ, Rozmiar>::ilosc_wektorow_aktualna(0);
+
+template<typename Typ, int Rozmiar>
+int Wektor<Typ, Rozmiar>::ilosc_wektorow_calkowita(0);
 
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar>::Wektor()
 {
+    ilosc_wektorow_aktualna++;
+    ilosc_wektorow_calkowita++;
     for(Typ &ElemTab : Tab)
         ElemTab=0;
 }
@@ -21,12 +28,16 @@ Wektor<Typ, Rozmiar>::Wektor(Typ x, Typ y, Typ z)
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar>::Wektor(Typ tablica[])
 {
+    ilosc_wektorow_aktualna++;
+    ilosc_wektorow_calkowita++;
     for(int i=0; i<Rozmiar; i++)
         this->Tab[i]=tablica[i];
 }
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar>::Wektor(std::initializer_list<Typ> in)
 {
+    ilosc_wektorow_aktualna++;
+    ilosc_wektorow_calkowita++;
     int i=0;
     for (auto & elem : in)
     {

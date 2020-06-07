@@ -5,9 +5,10 @@
 
 #include "Plaszczyzna.hh"
 #include "Przeszkoda.hh"
+#include "InterfejsDrona.hh"
 #include <cmath>
 
-class Dno: public Plaszczyzna, Przeszkoda
+class Dno: public Plaszczyzna, public Przeszkoda
 {
     double m_wysokosc;
 
@@ -16,9 +17,11 @@ public:
 
     Dno(double wymX, double wymY, double wysokosc):
         Plaszczyzna(wymX, wymY, 0, 0, wysokosc), m_wysokosc(wysokosc)
-    {std::cout<<m_wysokosc;}
+    {}
 
     bool czy_kolizja(std::shared_ptr<InterfejsDrona> D)override;
+
+    void Rysuj()override;
 
 };
 

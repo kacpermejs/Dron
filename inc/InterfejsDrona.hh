@@ -33,4 +33,6 @@ public:
 
 };
 
+class Przeszkoda;
+
 #endif

@@ -7,3 +7,8 @@ bool Dno::czy_kolizja(std::shared_ptr<InterfejsDrona> D)
     else
         return 0;
 }
+
+void Dno::Rysuj()
+{
+    Plaszczyzna::Rysuj();
+}

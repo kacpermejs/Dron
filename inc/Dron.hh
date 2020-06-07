@@ -5,6 +5,7 @@
 #include "InterfejsDrona.hh"
 #include "Prostopadloscian.hh"
 #include "Sruba.hh"
+#include "Przeszkoda.hh"
 
 #define WymiarXdrona 8
 #define WymiarYdrona 4
@@ -12,7 +13,7 @@
 /*!
  * \brief Klasa opisujaca drona podwodnego
  */
-class Dron: public InterfejsDrona, public Prostopadloscian
+class Dron: public InterfejsDrona, public Prostopadloscian, public Przeszkoda
 {
 /*!
  * \brief Sruba lewa
@@ -33,8 +34,8 @@ public:
  */
     Dron():
         Prostopadloscian(0,0,0,WymiarXdrona,WymiarYdrona,WymiarZdrona), 
-        L(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymiarXdrona/2)-(0.5*WYS_SRUBY),WymiarYdrona/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymiarXdrona/2)-(0.5*WYS_SRUBY),-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
@@ -51,8 +52,8 @@ public:
  */
     Dron(double WspX, double WspY, double WspZ):
         Prostopadloscian(WspX, WspY, WspZ,WymiarXdrona,WymiarYdrona,WymiarZdrona), 
-        L(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,WymiarYdrona/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{(-WymiarXdrona/2)-WYS_SRUBY,-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymiarXdrona/2)-(0.5*WYS_SRUBY),WymiarYdrona/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymiarXdrona/2)-(0.5*WYS_SRUBY),-WymiarYdrona/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
@@ -72,8 +73,8 @@ public:
  */
     Dron(double WspX, double WspY, double WspZ, double WymX, double WymY, double WymZ):
         Prostopadloscian(WspX, WspY, WspZ, WymX, WymY, WymZ),
-        L(Wektor3D{(-WymX/2)-WYS_SRUBY,WymY/2,0}, MacierzOb(90, 'y')),
-        P(Wektor3D{(-WymX/2)-WYS_SRUBY,-WymY/2,0}, MacierzOb(90, 'y'))
+        L(Wektor3D{(-WymX/2)-(0.5*WYS_SRUBY),WymY/2,0}, MacierzOb(90, 'y')),
+        P(Wektor3D{(-WymX/2)-(0.5*WYS_SRUBY),-WymY/2,0}, MacierzOb(90, 'y'))
     {
         L.przesun_z_dronem(m_WekPol, m_MacOrientacji);
         P.przesun_z_dronem(m_WekPol, m_MacOrientacji);
@@ -127,7 +128,11 @@ public:
     {
         return m_WekPol;
     }
+
+    bool czy_kolizja(std::shared_ptr<InterfejsDrona> D)override;
     
 };
+
+
 
 #endif

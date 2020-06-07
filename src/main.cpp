@@ -33,56 +33,76 @@ int main()
     vector<std::shared_ptr<Dron>> Kolekcja_Dronow;
     vector<std::shared_ptr<Przeszkoda>> Kolekcja_Przeszkod;
 
-    Kolekcja_Dronow.push_back(std::shared_ptr<Dron>(std::make_shared<Dron>()));
+    Kolekcja_Dronow.push_back(std::shared_ptr<Dron>(new Dron()));
+    Kolekcja_Dronow.push_back(std::shared_ptr<Dron>(new Dron(15,-15,8)));
 
-    Tafla woda(40, 40, 15);
-    Dno podloze(40, 40, -19);
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(new PrzeszkodaProst(-10,-10,0,5,5,15) ) );
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(new PrzeszkodaProst(10,10,0,5,5,15) ) );
 
-    PrzeszkodaProst klocek(10,10,0,5,5,15);
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(new Tafla(40, 40, 15) ) );
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(new Dno(40, 40, -19) ) );
 
     char input='0';
+    int numer_drona=0;
 
     for(auto elem: Kolekcja_Dronow)
-        {
-            elem->Rysuj();
-        }
-
-    woda.Rysuj();
-    podloze.Rysuj();
-    klocek.Rysuj();
+    {
+        elem->Rysuj();
+    }
+    std::cout << "Ilosc dronow: " << Kolekcja_Dronow.size() << "\n";
+    for(auto elem: Kolekcja_Przeszkod)
+    {
+        elem->Rysuj();
+    }
     
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(Kolekcja_Dronow[0]));
+    Kolekcja_Przeszkod.push_back(std::shared_ptr<Przeszkoda>(Kolekcja_Dronow[1]));
 
     while(input!='k')
     {
-        //system("clear");
-        
-        for(auto elem: Kolekcja_Dronow)
+        system("clear");
+        if(input=='d')
         {
-            input=elem->Input();
-            elem->Sterowanie();
-            elem->UI();
-            elem->Usun();
-            elem->Rysuj();
+            std::cout << "Ilosc dronow: " << Kolekcja_Dronow.size() << "\n";
+            std::cout << "wybierz drona: ";
+            std::cin >> numer_drona;
+        }
+        
+            input=Kolekcja_Dronow[numer_drona]->Input();
+            Kolekcja_Dronow[numer_drona]->Sterowanie();
 
+            std::cout << "Aktualna liczba wektorow3D: " << Wektor3D::zwroc_aktualna_liczbe();
+            std::cout << "\nCalkowita liczba wektorow3D: " << Wektor3D::zwroc_calkowita_liczbe() << "\n";
+
+            Kolekcja_Dronow[numer_drona]->UI();
+            Kolekcja_Dronow[numer_drona]->Usun();
+            Kolekcja_Dronow[numer_drona]->Rysuj();
             
 
-            if( podloze.czy_kolizja(elem) || woda.czy_kolizja(elem) || klocek.czy_kolizja(elem))
+        
+        for(auto elem: Kolekcja_Przeszkod)
+        {
+            
+            if(elem==std::shared_ptr<Przeszkoda>(Kolekcja_Dronow[numer_drona]) )
             {
-                elem->RejestrujKolizje();
+                Kolekcja_Dronow[numer_drona]->RejestrujBrakKolizji();
+            }
+            else if(elem->czy_kolizja(Kolekcja_Dronow[numer_drona]))
+            {
+                Kolekcja_Dronow[numer_drona]->RejestrujKolizje();
+                break;
             }
             else
             {
-                elem->RejestrujBrakKolizji();
+                Kolekcja_Dronow[numer_drona]->RejestrujBrakKolizji();
             }
-            
-            
             
         }
         
         
         InterfejsRysowania::Odswiez();
         
-        usleep(50000);
+        usleep(500000);
     }
 }
 
@@ -90,29 +110,36 @@ int main()
 /*
 int main()
 {
-    Prostopadloscian G1;
-    char input='0';
-    G1.Rysuj();
+    Wektor3D wek1({1,2,3});
+    Wektor3D wek2;
+    Wektor3D *wsk_wek;
 
-    while(input!='k')
-    {   
-        if(kbhit())
-        {
-            InterfejsRysowania::Usun(G1.GetNumer());
-            input=getchar();
-            
-            //G1.przesun({1,0,0});
-            G1.Rysuj();
-            G1.obroc(5, 'y');
-            //wait4key();
-            //G1.obroc(5, 'z');
-            
-            InterfejsRysowania::Odswiez();
-        }
+    cout << "Wektor 1: " << wek1 << endl;
+    cout << "Wektor 2: " << wek2 << endl;
+    cout << "Wektor wsk: " << wsk_wek << endl;
 
+    while(1)
+    {
+        std::cout << "Aktualna liczba wektorow3D: " << Wektor3D::zwroc_aktualna_liczbe();
+        std::cout << "\nCalkowita liczba wektorow3D: " << Wektor3D::zwroc_calkowita_liczbe() << "\n";
+        wsk_wek=new Wektor3D(wek2+wek1);
+        wek2=*wsk_wek;
+
+        cout << "Wektor 1: " << wek1 << endl;
+        cout << "Wektor 2: " << wek2 << endl;
+        cout << "Wektor wsk: " << wsk_wek << endl;
+        wait4key();
+        delete wsk_wek;
     }
+}
+*/
+/*
+int main()
+{
+    Dron d1;
 
-
-
-
+    d1.Rysuj();
+    InterfejsRysowania::Odswiez();
+    wait4key();
+    wait4key();
 }*/

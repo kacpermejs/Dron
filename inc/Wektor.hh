@@ -16,16 +16,41 @@
 template<typename Typ, int Rozmiar>
 class Wektor {
 protected:
+    static int ilosc_wektorow_aktualna;
+    static int ilosc_wektorow_calkowita;
     Typ Tab[Rozmiar]; //4 tablica statyczna
 
     public:
 
     Wektor<Typ, Rozmiar>();
 
+    Wektor<Typ, Rozmiar>(const Wektor<Typ, Rozmiar> & wek2)
+    {
+        ilosc_wektorow_aktualna++;
+        ilosc_wektorow_calkowita++;
+        for(int i=0; i<Rozmiar; i++)
+            this->Tab[i]=wek2[i];
+    }
+
     //Wektor<Typ, Rozmiar>(double x, double y, double z);
     //Wektor<Typ, Rozmiar>(Typ x,Typ y, Typ z);//tylko dla 3
     Wektor<Typ, Rozmiar>(Typ tablica[]);
     Wektor<Typ, Rozmiar>(std::initializer_list<Typ> in);
+
+    ~Wektor<Typ, Rozmiar>()
+    {
+        ilosc_wektorow_aktualna--;
+    }
+
+    static int zwroc_aktualna_liczbe()
+    {
+        return ilosc_wektorow_aktualna;
+    }
+
+    static int zwroc_calkowita_liczbe()
+    {
+        return ilosc_wektorow_calkowita;
+    }
 
     Wektor<Typ, Rozmiar> & operator += (const Wektor<Typ, Rozmiar> & W2); //W1 += W2  , W1 += W3 += W4
     Wektor<Typ, Rozmiar> & operator -= (const Wektor<Typ, Rozmiar> & W2);

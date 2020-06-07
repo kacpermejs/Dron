@@ -1,4 +1,5 @@
 #include "Dron.hh"
+#include <memory>
 /*
 int Dron::Rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api)
 {
@@ -42,16 +43,42 @@ void Dron::Plyn(double & odleglosc, double & kat)
     {
         if(odleglosc > PredkoscX)
         {
-            przesun(m_MacOrientacji*Wektor3D{PredkoscX,0,0});
-            odleglosc-=PredkoscX;
-            L.krec(-10);
-            P.krec(10);
+            Wektor3D przesuniecie=Wektor3D{PredkoscX,0,0};
+
+            if(!Kolizja)
+            {
+                przesun(m_MacOrientacji*przesuniecie);
+                odleglosc-=PredkoscX;
+                L.krec(-10);
+                P.krec(10);
+            }
+            else
+            {
+                przesun(m_MacOrientacji*(-1*przesuniecie));
+                obroc(-kat, 'y');
+                Pochylanie=0;
+                kat=0;
+                odleglosc=0;
+                Plynie=0;
+            }
+            
         }
         else if(odleglosc <= PredkoscX)
         {
-            przesun(m_MacOrientacji*Wektor3D{odleglosc,0,0});
-            L.krec(-10);
-            P.krec(10);
+            Wektor3D przesuniecie=Wektor3D{odleglosc,0,0};
+
+            if(!Kolizja)
+            {
+                przesun(m_MacOrientacji*przesuniecie);
+            
+                L.krec(-10);
+                P.krec(10);
+            }
+            else
+            {
+                przesun(m_MacOrientacji*(-1*przesuniecie));
+            }
+
             obroc(-kat, 'y');
             Pochylanie=0;
             kat=0;
@@ -63,16 +90,42 @@ void Dron::Plyn(double & odleglosc, double & kat)
     {
         if(odleglosc < -PredkoscX)
         {
-            przesun(m_MacOrientacji*Wektor3D{-PredkoscX,0,0});
-            odleglosc+=PredkoscX;
-            L.krec(10);
-            P.krec(-10);
+            Wektor3D przesuniecie=Wektor3D{-PredkoscX,0,0};
+
+            if(!Kolizja)
+            {
+                przesun(m_MacOrientacji*przesuniecie);
+            
+                odleglosc+=PredkoscX;
+                L.krec(10);
+                P.krec(-10);
+            }
+            else
+            {
+                przesun(m_MacOrientacji*(-1*przesuniecie));
+                obroc(-kat, 'y');
+                Pochylanie=0;
+                kat=0;
+                odleglosc=0;
+                Plynie=0;
+            }
+            
         }
         else if(odleglosc >= -PredkoscX)
         {
-            przesun(m_MacOrientacji*Wektor3D{odleglosc,0,0});
-            L.krec(10);
-            P.krec(-10);
+            Wektor3D przesuniecie=Wektor3D{-odleglosc,0,0};            
+            
+            if(!Kolizja)
+            {
+                przesun(m_MacOrientacji*przesuniecie);
+                L.krec(10);
+                P.krec(-10);                
+            }
+            else
+            {
+                przesun(m_MacOrientacji*(-1*przesuniecie));
+            }
+            
             obroc(-kat, 'y');
             Pochylanie=0;
             kat=0;
@@ -131,4 +184,12 @@ void Dron::Usun()
     Prostopadloscian::Usun();
     L.Usun();
     P.Usun();
+}
+
+bool Dron::czy_kolizja(std::shared_ptr<InterfejsDrona> D)
+{
+    if(    Wektor3D(D->zwrocSrodek() - this->zwrocSrodek()).dlugosc()  <=  ( D->zwrocPromien() + this->zwrocPromien() )    )
+        return true;
+    else
+        return false;
 }
